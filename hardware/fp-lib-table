@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "neogeo-161in1-dual-daughterboard")(type "KiCad")(uri "${KIPRJMOD}/neogeo-161in1-dual-daughterboard.pretty")(options "")(descr ""))
+)
