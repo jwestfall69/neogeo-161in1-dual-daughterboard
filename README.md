@@ -1,5 +1,13 @@
 # neogeo-161in1-dual-daughterboard
 
+  * [Overview](#overview)
+  * [PCB Manufacturing](#pcb-manufacturing)
+  * [Parts](#parts)
+  * [Soldering](#soldering)
+  * [Programming](#programming)
+  * [What to flash](#what-to-flash)
+  * [Install](#install)
+
 ## Overview
 Vortex's [VTXCart](https://github.com/xvortex/VTXCart/tree/main) project allows rewriting the flash/CPLD chips on the 161in1 V3 cart to contain whatever neogeo games you want.  However there isn't enough C flash space on a stock 161in1 cart to handle the entire neogeo library.  
 
@@ -14,7 +22,7 @@ The C (and V) flash chips come on small daughterboards, one flash chip per daugh
 ![assembled_top](images/assembled_top.jpg)
 ![assembled_bottom](images/assembled_bottom.jpg)
 
-## Manufacturing
+## PCB Manufacturing
 You should select board thickness of 0.8mm.
 
 The board has very fine pitched (0.8mm) castellated holes on it.  Ideally you would want to pick the castellated holes option with the PCB manufacture so they get cut cleanly.  However the PCB manufacturer will likely reject the order if you pick the option because most require 0.6mm hole diameter and 0.6mm distance between castellated holes.
@@ -54,8 +62,11 @@ crom-2 = normal daughterboard (installed in the left most C rom daughterboard lo
 crom-3 = U2 on dual daughterboard<br>
 
 ## Install
-Installed should looks like this
-![installed](images/installed.jpg)
+The original daughterboards are soldered to the CHA/PROG boards.  As part of creating a VTXCart you should be installing female connectors to make the daughterboards plugable as seen here.
+
+![cha_female_connectors](images/cha_female_connectors.jpg)
+
+These female connectors are require for the dual daughterboard to fit properly.  Trying to solder it directly to the CHA board will cause you to run into clearance issues with the CPLD.
 
 The dual daughterboard must be installed into the right most C rom daughterboard location.  Its not possible for it to be installed in the left location because it would collide with the white board to board connector on the back of the PROG board.  This is also why you can't do 4G of C rom space (not that there would be a need to have that much).
 
@@ -69,9 +80,12 @@ MVS
   * OE1 = PIN 31
   * OE2 = PIN 30
 
-You should however verify this is still the case by looking at the pin assignments for the CHA_CP1 CPLD in the VTXCart project.  Look for C3_nOE[0] (OE1) and C3_nOE[1] (OE2) under Assignments -> Pin Planner in Quartus.
+You should however verify this is still the case by looking at the pin assignments for the CHA_CP1 CPLD in the VTXCart project.  Look for ```C3_nOE[0]``` (OE1) and ```C3_nOE[1]``` (OE2) under Assignments -> Pin Planner in Quartus.
 
-Additionally an adjustment needs to be made to the bends of board the board cable to make space for the dual daughterboard.
+Fully installed it should looks like this (MVS)
+![installed](images/installed.jpg)
+
+Lastly an adjustment needs to be made to the bends of board the board cable to make space for the dual daughterboard.
 
 This is what it normally looks like (back of PROG board):
 ![prog_cable_default](images/prog_cable_default.jpg)
